@@ -7,7 +7,7 @@
         public string Bio { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; } = DateTime.Now;
         public string Image { get; set; } = string.Empty;
-        public int TimeId { get; set; } = 1;
+        public int TeamId { get; set; } = 1;
         public int DifficultyId { get; set; } = 1;
         public bool IsReadyToFight { get; set; } = true;
 
