@@ -76,6 +76,13 @@
         <InputCheckbox id="readyToFight" @bind-Value="character.IsReadyToFight" class="form-check-input"></InputCheckbox>
         <label for="readyToFight" class="form-check-label">Ready To Fight</label>
     </div>
+    <div>
+        <img src ="@character.Image" class = "rounded" style="max-height: 200px"/>
+    </div>
+    <div>
+        <label for="image">Image</label>
+        <InputFile OnChange="OnFileChange" class="form-control"></InputFile>
+    </div>
 </EditForm>
 
 <p style="height:500px "></p>
@@ -130,6 +137,17 @@
         {
             characters.Add(character);
         }
+    }
+
+    async Task OnFileChange(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 200, 200);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format}; base64,{Convert.ToBase64String(buffer)}";
+        character.Image = imageData;
+
     }
 }
 
